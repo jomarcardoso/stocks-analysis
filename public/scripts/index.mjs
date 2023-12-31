@@ -1,11 +1,16 @@
 import { getBrowser } from './browser.mjs';
-import { getSiteByBrowser } from './page.mjs';
+import { getLogo } from './dom.mjs';
+import { getWebsite } from './website.mjs';
 
-function start() {
+async function start() {
   const browser = getBrowser();
-  const site = getSiteByBrowser(browser);
+  const website = await getWebsite(browser);
 
-  console.log(site);
+  getLogo(browser);
+
+  // configPopup();
+
+  console.log(browser, website);
 }
 
 start();
