@@ -77,6 +77,10 @@ export async function getNetProfits(browser, website) {
       row.querySelector('td:nth-child(32)')?.textContent,
       row.querySelector('td:nth-child(35)')?.textContent,
       row.querySelector('td:nth-child(38)')?.textContent,
+      row.querySelector('td:nth-child(41)')?.textContent,
+      row.querySelector('td:nth-child(44)')?.textContent,
+      row.querySelector('td:nth-child(47)')?.textContent,
+      row.querySelector('td:nth-child(50)')?.textContent,
     ]
       .filter((a) => !!a)
       .map(

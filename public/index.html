@@ -10,14 +10,31 @@
 
 <body>
   <div class="p-3">
-    <div class="flex gap-4">
-      <img is="sa-logo" class="my-1">
+    <div class="p-2 border-2 inline-block">
+      <div class="flex gap-4 items-start mb-2">
+        <img is="sa-logo" class="my-1">
 
-      <div>
-        <h1 is="sa-ticker"></h1>
-        <sa-name></sa-name>
+        <div>
+          <h1 is="sa-ticker"></h1>
+          <sa-name></sa-name>
+        </div>
       </div>
+
+      <sa-price></sa-price>
     </div>
+
+    <table class="border-collapse table-auto">
+      <tbody>
+        <tr>
+          <th>
+            P/L
+          </th>
+          <td id="value-pl">
+
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 
   <script type="module" src="./scripts/index.mjs"></script>
