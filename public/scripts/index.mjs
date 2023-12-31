@@ -1,5 +1,12 @@
 import { getBrowser } from './browser.mjs';
-import { getLogoUrl, getName, getTicker } from './dom.mjs';
+import {
+  getAvailableStocks,
+  getLogoUrl,
+  getName,
+  getNetProfits,
+  getPrice,
+  getTicker,
+} from './dom.mjs';
 import { getWebsite } from './website.mjs';
 
 async function start() {
@@ -8,6 +15,14 @@ async function start() {
   const logo = await getLogoUrl(browser);
   const ticker = await getTicker(browser);
   const name = await getName(browser);
+  const price = await getPrice(browser);
+  const netProfit = await getNetProfits(browser);
+  const availableStocks = await getAvailableStocks(browser);
+
+  console.log(
+    (netProfit[0] + netProfit[1] + netProfit[2] + netProfit[3]) /
+      availableStocks,
+  );
 
   class Logo extends HTMLImageElement {
     connectedCallback() {
