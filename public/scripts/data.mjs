@@ -10,11 +10,18 @@ import {
   getTicker,
 } from './dom.mjs';
 
-function calculateLPA(availableStocks, netProfits) {
+function calculateLPA(availableStocks, netProfits = []) {
   return (
-    (netProfits[0] + netProfits[1] + netProfits[2] + netProfits[3]) /
+    ((netProfits?.[0] || 0) +
+      (netProfits?.[1] || 0) +
+      (netProfits?.[2] || 0) +
+      (netProfits?.[3] || 0)) /
     availableStocks
   );
+}
+
+function calculateLastLPA(availableStocks, lastProfit = 0) {
+  return ((lastProfit || 0) * 4) / availableStocks;
 }
 
 function calculatePL(lpa, price) {
@@ -33,7 +40,11 @@ export async function getData(browser, website) {
   const price = await getPrice(browser, website);
   const netProfits = await getNetProfits(browser, website);
   const lpa = calculateLPA(availableStocks, netProfits);
+  const lastLPA = calculateLastLPA(availableStocks, netProfits[0]);
   const pl = calculatePL(lpa, price);
+  const previewPL = calculatePL(lastLPA, price);
+
+  console.log(availableStocks, netProfits);
 
   return {
     ticker,
@@ -44,5 +55,6 @@ export async function getData(browser, website) {
     lpa,
     price,
     pl,
+    previewPL,
   };
 }

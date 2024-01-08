@@ -1,13 +1,5 @@
 import { getBrowser } from './browser.mjs';
 import { getData } from './data.mjs';
-import {
-  getAvailableStocks,
-  getLogoUrl,
-  getName,
-  getNetProfits,
-  getPrice,
-  getTicker,
-} from './dom.mjs';
 import { render } from './render.mjs';
 import { getWebsite } from './website.mjs';
 

@@ -65,13 +65,20 @@ function createPrice(price = 0) {
 function renderPL(pl = 0) {
   const el = document.querySelector('#value-pl');
 
-  el.innerHTML = pl.toFixed(2);
+  el.innerHTML = Number(String(pl).split('e')[0]).toFixed(2);
 }
 
-export function render({ logoUrl, ticker, name, price, pl }) {
+function renderPreviewPL(previewPL = 0) {
+  const el = document.querySelector('#value-preview-pl');
+
+  el.innerHTML = Number(String(previewPL).split('e')[0]).toFixed(2);
+}
+
+export function render({ logoUrl, ticker, name, price, pl, previewPL }) {
   createLogo(logoUrl);
   createTicker(ticker);
   createName(name);
   createPrice(price);
   renderPL(pl);
+  renderPreviewPL(previewPL);
 }
