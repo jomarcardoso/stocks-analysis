@@ -1,5 +1,30 @@
 import { EXECUTE_SCRIPTS } from './extension.mjs';
 
+export async function loadPage(browser) {
+  const result = EXECUTE_SCRIPTS[browser](() => {
+    return new Promise((resolve) => {
+      /** @type {HTMLElement} */
+      const footer = document.querySelector('#main-footer');
+
+      const originalPosition = document.scrollingElement.scrollTop;
+
+      window.scrollTo({
+        top: footer?.offsetTop ?? 99999,
+      });
+
+      setTimeout(() => {
+        resolve();
+
+        window.scrollTo({
+          top: originalPosition,
+        });
+      }, 2000);
+    });
+  });
+
+  return result;
+}
+
 export async function getLogoUrl(browser, website) {
   const logoUrl = await EXECUTE_SCRIPTS[browser](() => {
     var logoEl = document.querySelector('[title^="Logotipo da empresa"]');
@@ -77,8 +102,6 @@ export async function getNetProfits(browser, website) {
         const row = divs.find(
           (a) => a.textContent === 'Lucro atribuído a Controladora',
         ).parentElement.parentElement.parentElement.parentElement;
-
-        console.log(row);
 
         return resolve(
           [

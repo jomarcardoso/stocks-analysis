@@ -8,6 +8,7 @@ import {
   getNetProfits,
   getPrice,
   getTicker,
+  loadPage,
 } from './dom.mjs';
 
 function calculateLPA(availableStocks, netProfits = []) {
@@ -33,6 +34,7 @@ function calculatePL(lpa, price) {
  * @param {Website} website
  */
 export async function getData(browser, website) {
+  await loadPage(browser);
   const ticker = await getTicker(browser, website);
   const name = await getName(browser, website);
   const logoUrl = await getLogoUrl(browser, website);
@@ -43,8 +45,6 @@ export async function getData(browser, website) {
   const lastLPA = calculateLastLPA(availableStocks, netProfits[0]);
   const pl = calculatePL(lpa, price);
   const previewPL = calculatePL(lastLPA, price);
-
-  console.log(availableStocks, netProfits);
 
   return {
     ticker,
